@@ -102,7 +102,7 @@ ngProgress.setParent(document.getElementById('container'));
 * **getIncrement** - Returns the 'step' between each tick of the progress bar.
 
 ```javascript
-ngProgress.setIncrement();
+ngProgress.getIncrement();
 ```
 
 * **setIncrement** - Sets the 'step' between each tick of the progress bar. A smaller increment means the progress bar will take more iterations to reach 100%
