@@ -99,6 +99,24 @@ ngProgress.complete();
 ngProgress.setParent(document.getElementById('container'));
 ```
 
+* **getIncrement** - Returns the 'step' between each tick of the progress bar.
+
+```javascript
+ngProgress.setIncrement();
+```
+
+* **setIncrement** - Sets the 'step' between each tick of the progress bar. A smaller increment means the progress bar will take more iterations to reach 100%
+
+```javascript
+ngProgress.setIncrement(0.05);
+```
+
+* **resetIncrement** - Resets the 'step' between each tick of the progress bar to the default value
+
+```javascript
+ngProgress.resetIncrement();
+```
+
 * **getDomElement** - Gets the DOM element  which visizualizes the progress bar. It is wrapped as a jqlite element - https://docs.angularjs.org/api/ng/function/angular.element
 
 ```javascript
