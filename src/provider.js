@@ -3,10 +3,13 @@ angular.module('ngProgress.provider', ['ngProgress.directive'])
     .provider('ngProgress', function () {
         'use strict';
         //Default values for provider
+        var DEFAULT_INCREMENT = 0.15;
+
         this.autoStyle = true;
         this.count = 0;
         this.height = '2px';
         this.color = 'firebrick';
+        this.increment = DEFAULT_INCREMENT;
 
         this.$get = ['$document',
             '$window',
@@ -16,6 +19,7 @@ angular.module('ngProgress.provider', ['ngProgress.directive'])
             var count = this.count,
                 height = this.height,
                 color = this.color,
+                increment = this.increment,
                 $scope = $rootScope,
                 parent = $document.find('body')[0];
 
@@ -53,10 +57,22 @@ angular.module('ngProgress.provider', ['ngProgress.directive'])
                             self.hide();
                         } else {
                             var remaining = 100 - count;
-                            count = count + (0.15 * Math.pow(1 - Math.sqrt(remaining), 2));
+                            count = count + (increment * Math.pow(1 - Math.sqrt(remaining), 2));
                             self.updateCount(count);
                         }
                     }, 200);
+                },
+                // Returns the increment used by the progress bar
+                getIncrement: function(){
+                    return increment;
+                },
+                // Sets the increment of the progress bar
+                setIncrement: function(new_increment){
+                    increment = new_increment;
+                },
+                // Resets the increment to the default value
+                resetIncrement: function () {
+                   increment = DEFAULT_INCREMENT;
                 },
                 updateCount: function (new_count) {
                     $scope.count = new_count;

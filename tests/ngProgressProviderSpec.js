@@ -140,7 +140,22 @@ describe('How the provider should work', function () {
         waits(200);
         runs(function () { expect([6, this.progressbar.status()]).toEqual([6, 100]); });
     });
-    
+
+    it('allow the progress bar to have a default increment of 0.15', function () {
+        expect(this.progressbar.getIncrement()).toBe(0.15);
+    });
+
+    it('allow you to change the increment of the progress bar', function () {
+        this.progressbar.setIncrement(0.25);
+        expect(this.progressbar.getIncrement()).toBe(0.25);
+    });
+
+    it('allow you to reset the increment of the progress bar', function () {
+        this.progressbar.setIncrement(0.25);
+        this.progressbar.resetIncrement();
+        expect(this.progressbar.getIncrement()).toBe(0.15);
+    });
+
     it('allow you to change the parent of the progressbar', function () {
         var domElement = this.progressbar.getDomElement()[0];
         expect(domElement.parentNode).toEqual(document.body);
@@ -149,13 +164,13 @@ describe('How the provider should work', function () {
         document.body.appendChild(div);
         this.progressbar.setParent(div);
         expect(domElement.parentNode).toEqual(div);
-    })
+    });
     
     it('throws exception when invalid parent is set', function () {
         var that = this;
         expect(function () {
             that.progressbar.setParent(null);
         }).toThrow(new Error('Provide a valid parent of type HTMLElement'));
-    })
+    });
 
 });
